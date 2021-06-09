@@ -1,10 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'Tour of Heroes';
+
+  // 第一種方法
+
+  // @ViewChild('tests') div!:ElementRef;
+  // constructor() {}
+  
+  // ngAfterViewInit(){
+  //   console.log(this.div)
+  // } 
+
+  // 第二種方法
+  @ViewChild('tests') div!:ElementRef<HTMLElement>;
+ 
+  tests():void {
+    console.log(this.div.nativeElement)
+  }
+  
 }

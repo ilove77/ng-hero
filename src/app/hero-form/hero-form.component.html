@@ -1,0 +1,115 @@
+<!-- 地一部分 範本-->
+<div class="jumbotron">
+    <h2>Template Driven Form</h2>
+     <!-- 這邊我們宣告一個區域變數 "form" 並讓它變成 ngForm 的實例。這樣子可以讓 "form" 使用 FormGroup的 API，我們就能夠用 ngSubmit 送出 form.value 表格的值。-->
+     <!-- `novalidate`使用模板驅動的方法時，Angular會自動將屬性添加到表單中。這就是為什麼您不會被阻止提交的原因。 -->
+     <!-- 在form tag 所以要使用ngNativeValidate 強迫驗證 -->
+    <form #form="ngForm"  (ngSubmit)="submitForm(form.value)" >
+        <!-- class form group 也有-->
+      <div class="form-group">
+        <label>First Name:</label>
+        <!-- 這邊的 ngModal 是單向綁定，只會送資料回去。當然我們也可以用 [(ngModal)] 來雙向綁定表格的值 -->
+        <!-- name 和 ngModel 是必須存在的 -->
+        <input type="text" class="form-control" placeholder="John" name="firstName" #name="ngModel" ngModel required>
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">姓名是必填欄位！</div>
+        目前的資料狀態[姓名]：{{model.name}}
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" class="form-control" placeholder="Doe" name="lastName" ngModel required>
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+      </div>
+      <!-- Radio 和 checkbox 跟一般的 HTML用法差不多 -->
+      <div class="radio">
+        <label>
+          <input type="radio" name="gender" value="Male" ngModel>
+          Male
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="gender" value="Female" ngModel>
+          Female
+        </label>
+      </div>
+      <div class="form-group">
+        <label>Activities</label>
+      </div>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="hiking" name="hiking" ngModel> 
+        Hiking
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="swimming" name="swimming" ngModel> 
+        Swimming
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" value="running" name="running" ngModel> 
+        Running
+      </label>
+      <div class="form-group">
+        <label>test</label>
+        <input type="text" class="form-control"  name="test" [(ngModel)]="test" required #tests>
+      </div>
+      <div>{{tests.className}}</div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="form.reset()">新增英雄</button>
+          <!-- 可以進一步的把表單的總體有效性透過 heroForm 變數繫結到此按鈕的 disabled 屬性，這樣能讓使用者明白如果沒有填寫姓名是不能提交的。 -->
+        <button type="submit"  [disabled]="!form.form.valid" class="btn btn-default">Submit</button>
+      </div>
+    </form>
+  </div>
+
+ 
+<!-- 第二部分 響應示-->
+
+<form [formGroup]="profileForm" (ngSubmit)="onsubmit()" ngNativeValidate>
+    <label>
+      First Name:
+      <input type="text" formControlName="firstName">
+    </label>
+    <!-- 觸發不符合條件 -->
+    <p class="errors" *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)">
+        <span *ngIf="f.firstName.errors?.required">
+          <i class="fas fa-exclamation-triangle"></i>請填寫帳號
+        </span>
+        <span *ngIf="f.firstName.errors?.email && f.firstName.errors?.touched">
+          <i class="fas fa-exclamation-triangle"></i> 123
+        </span>
+      </p>
+    <br>
+    <label>
+      Last Name:
+      <input type="text" formControlName="lastName">
+      
+    </label>
+    <!-- 巢狀的group寫成這樣 -->
+    <div formGroupName="address">
+      <h3>Address</h3>
+      <label>
+        Street:
+        <input type="text" formControlName="street">
+      </label>
+      <br>
+      <label>
+        City:
+        <input type="text" formControlName="city">
+      </label>
+      <br>
+      <label>
+        State:
+        <input type="text" formControlName="state">
+      </label>
+      <br>
+      <label>
+        Zip Code:
+        <input type="text" formControlName="zip">
+      </label>
+    </div>
+    <!-- 若表單所有條件有不符合將提交按鈕disable -->
+    <button type="submit" [disabled]="!profileForm.valid">提交</button>
+    <button type="button" (click)="updateProfile()">更新</button>
+  </form>
+  
