@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteGuardComponent } from './route-guard/route-guard.component';
 import { TestpipePipe } from './testpipe.pipe';
 import { AnimationComponent } from './animation/animation.component';
+import { NgContentComponent } from './ng-content/ng-content.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { AnimationComponent } from './animation/animation.component';
     NestHttpComponent,
     RouteGuardComponent,
     TestpipePipe,
-    AnimationComponent
+    AnimationComponent,
+    NgContentComponent
   ],
   imports: [
     BrowserModule,

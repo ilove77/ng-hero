@@ -1,5 +1,6 @@
 <h1>{{title}}</h1>
-<div class="test" (click)="tests()" >測試dom</div>
+<div class="test" (click)="tests($event)" >測試dom</div>
+<div *ngFor="let item of items">{{item}}</div>
 <app-animation></app-animation>
 <p class="tests">Super power boost: {{2 | testpipe: 10}}</p>
 <mat-slider min="1" max="100" step="1" value="1"></mat-slider>

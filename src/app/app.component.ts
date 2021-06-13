@@ -8,7 +8,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 })
 export class AppComponent {
   title = 'Tour of Heroes';
-
+  items = [1,2,3,4]
   // 第一種方法
 
   // @ViewChild('tests') div!:ElementRef;
@@ -19,10 +19,13 @@ export class AppComponent {
   // } 
 
   // 第二種方法
-  @ViewChild('tests') div!:ElementRef<HTMLElement>;
+  // @ViewChild('tests') div!:ElementRef<HTMLElement>;
  
-  tests():void {
-    console.log(this.div.nativeElement)
+  // tests():void {
+  //   console.log(this.div.nativeElement)
+  // }
+  tests(events:any):void{
+    console.log(event)
   }
   
 }

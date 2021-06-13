@@ -1,3 +1,4 @@
+import { NgmaterialComponent } from './ngmaterial/ngmaterial.component';
 import { RouteGuardComponent } from './route-guard/route-guard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'nest',component:NestHttpComponent},
   // 路由守衛
   {path:'routerguard',component:RouteGuardComponent,canActivate:[AuthGuard]},
+  {path:'ngmaterial',component:NgmaterialComponent},
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
